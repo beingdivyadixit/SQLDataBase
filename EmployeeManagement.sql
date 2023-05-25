@@ -75,6 +75,20 @@ use Employee_Management;
 
   select * from Job_Department;
 
+  ----add one column----
+   alter table Job_Department add Date_Of_Jon date;
+   select * from Job_Department;
+
+   -----insert data in newly added column---
+
+  UPDATE Job_Department set Date_Of_Jon = '2002-02-02' where job_id=1;
+  UPDATE Job_Department set Date_Of_Jon = '2002-02-03' where job_id=2;
+  UPDATE Job_Department set Date_Of_Jon = '2002-04-02' where job_id=3;
+  UPDATE Job_Department set Date_Of_Jon = '2004-02-12' where job_id=4;
+  UPDATE Job_Department set Date_Of_Jon = '2002-09-02' where job_id=5;
+  UPDATE Job_Department set Date_Of_Jon = '2003-12-12' where job_id=6;
+  UPDATE Job_Department set Date_Of_Jon = '2004-12-02' where job_id=7;
+
 
    create table Salary(
  salary_id int not null,
@@ -132,6 +146,22 @@ use Employee_Management;
   from Employee_Dtls
   go
 
+ 
+
+  select *, Date_Of_Jon=
+  case
+  when job_id=1 then '2002-02-02'
+ when job_id=2 then '2002-02-03'
+ when job_id=3 then '2002-04-02'
+ when job_id=4 then '2004-02-12'
+ when job_id=5 then '2002-09-02'
+ when job_id=6 then '2003-12-12'
+ when job_id=7 then '2004-12-02'
+
+  end
+  from Job_Department
+  go
+
   --- User Defined Functions----- ----1. scaler valued functions----
 
   create function add_Five(@num as int)
@@ -155,3 +185,8 @@ use Employee_Management;
 
   select * from dbo.select_gen('male')
    select * from dbo.select_gen('female')
+
+
+   select year('2023-02-02');
+
+   SELECT * FROM Job_Department WHERE Date_Of_Jon >'2003-11-11'
