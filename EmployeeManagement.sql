@@ -116,4 +116,42 @@ use Employee_Management;
  select
  case
  when  10>20    then '10 is greater than 20'
- whe
+ when 10<20 then '10 is less than 20'
+ else '10 is equal to 20'
+ end
+
+
+  select * from Employee_Dtls;
+
+  select *, grade=
+  case
+  when Salary<400000 then 'B'
+  when Salary>400000 then 'A'
+  else 'C'
+  end
+  from Employee_Dtls
+  go
+
+  --- User Defined Functions----- ----1. scaler valued functions----
+
+  create function add_Five(@num as int)
+  returns int
+  as
+  begin
+  return(@num +5)
+  end
+
+  select dbo.add_Five(10)
+
+
+  ---2. Table valued function----
+
+  select * from Employee_Dtls;
+
+  create function select_gen(@gender as varchar(20))
+  returns table
+  as
+  return(select *from Employee_Dtls where gender=@gender)
+
+  select * from dbo.select_gen('male')
+   select * from dbo.select_gen('female')
